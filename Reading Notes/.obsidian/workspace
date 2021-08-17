@@ -1,0 +1,103 @@
+{
+  "main": {
+    "id": "be94a3bae9ff39ad",
+    "type": "split",
+    "children": [
+      {
+        "id": "012c42391c41f7be",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Access Control.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "16b12ee6af970046",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6ba5bdf9a24666a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "992658d5cf917478",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "6acab6c317e44c66",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 275,
+    "collapsed": true
+  },
+  "right": {
+    "id": "c3b84cb079de4b08",
+    "type": "split",
+    "children": [
+      {
+        "id": "285e2a5b841ae7e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "410df9281138be31",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Access Control.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "012c42391c41f7be",
+  "lastOpenFiles": [
+    "Access Control.md",
+    "Untitled.md",
+    "Assignment1_Instructions.md",
+    "Screen Shot 2021-08-16 at 10.37.32 AM.png",
+    "Nested Types.md",
+    "est.md",
+    "Neated.md",
+    "Untitled 1.md",
+    "Collection Types.md",
+    "Closures.md"
+  ]
+}

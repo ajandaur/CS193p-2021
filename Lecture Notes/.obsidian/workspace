@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "91f7c5b1f506966c",
+    "type": "split",
+    "children": [
+      {
+        "id": "c91bb85158f06081",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "More MVVM enum, Optionals.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "873766f020e43d78",
+    "type": "split",
+    "children": [
+      {
+        "id": "684ccc5b99167a85",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "020fdc72598198f4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "331a1b4c03f27d67",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 100
+  },
+  "right": {
+    "id": "12934c3150a8a923",
+    "type": "split",
+    "children": [
+      {
+        "id": "925037248859176e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "75ff132250105dbc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "More MVVM enum, Optionals.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "c91bb85158f06081",
+  "lastOpenFiles": [
+    "More MVVM enum, Optionals.md",
+    "MVVM and the Swift Type System.md",
+    "Screen Shot 2021-08-06 at 9.41.09 AM.png",
+    "Screen Shot 2021-08-06 at 9.48.58 AM.png",
+    "MVVM.md",
+    "Animation Demo.md",
+    "Untitled 5.md",
+    "Persistence Error Handling.md",
+    "Untitled.md",
+    "Untitled 7.md"
+  ]
+}
