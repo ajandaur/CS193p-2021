@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Access Control.md",
+            "file": "Basics.md",
             "mode": "source"
           }
         }
@@ -52,8 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275,
-    "collapsed": true
+    "width": 100
   },
   "right": {
     "id": "c3b84cb079de4b08",
@@ -69,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Access Control.md",
+                "file": "Basics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,15 +88,15 @@
   },
   "active": "012c42391c41f7be",
   "lastOpenFiles": [
+    "Basics.md",
+    "Assignment2_Instructions.md",
+    "Assignment1_Instructions.md",
     "Access Control.md",
     "Untitled.md",
-    "Assignment1_Instructions.md",
     "Screen Shot 2021-08-16 at 10.37.32 AM.png",
     "Nested Types.md",
     "est.md",
     "Neated.md",
-    "Untitled 1.md",
-    "Collection Types.md",
-    "Closures.md"
+    "Untitled 1.md"
   ]
 }

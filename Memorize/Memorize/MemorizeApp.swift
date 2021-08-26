@@ -11,11 +11,11 @@ import SwiftUI
 struct MemorizeApp: App {
     // creating an EmojiMemoryGame() due to the free init that classes have that does nothing
     // "let game" is a pointer to the class. The pointer can't change, but what it points to can be changed
-    let game = EmojiMemoryGame()
+    private let game = EmojiMemoryGame()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(game: game)
+            EmojiMemoryGameView(game: game)
         }
     }
 }

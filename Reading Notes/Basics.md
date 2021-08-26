@@ -307,6 +307,8 @@ do {
 }
 ```
 A `do` statement creates a new containing scope, which allows errors to be propagated to one or more `catch` clauses.
+# Error Handling
+
 # Assertions and Preconditions
 _Assertions_ and _preconditions_ are checks that happen at runtime. You use them to make sure an essential condition is satisfied before executing any further code. If the Boolean condition in the assertion or precondition evaluates to `true`, code execution continues as usual. If the condition evaluates to `false`, the current state of the program is invalid; code execution ends, and your app is terminated.
 
