@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87226EB726DAF3E1000958A3 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87226EB626DAF3E1000958A3 /* Cardify.swift */; };
 		87322D0426AA5B5F00A11D6E /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87322D0326AA5B5F00A11D6E /* MemorizeApp.swift */; };
 		87322D0626AA5B5F00A11D6E /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87322D0526AA5B5F00A11D6E /* EmojiMemoryGameView.swift */; };
 		87322D0826AA5B6900A11D6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87322D0726AA5B6900A11D6E /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		87226EB626DAF3E1000958A3 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = SOURCE_ROOT; };
 		87322D0026AA5B5F00A11D6E /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87322D0326AA5B5F00A11D6E /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		87322D0526AA5B5F00A11D6E /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		87322D0226AA5B5F00A11D6E /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				87226EB626DAF3E1000958A3 /* Cardify.swift */,
 				8781869B26D55FBF006FC19F /* Pie.swift */,
 				8781869926D35332006FC19F /* AspectVGrid.swift */,
 				87E1640726CE1B45003337F6 /* Themes.swift */,
@@ -159,6 +162,7 @@
 				875FDC8F26BDADF70082FF89 /* MemoryGame.swift in Sources */,
 				87322D0626AA5B5F00A11D6E /* EmojiMemoryGameView.swift in Sources */,
 				8781869E26D571BD006FC19F /* oneAndOnly.swift in Sources */,
+				87226EB726DAF3E1000958A3 /* Cardify.swift in Sources */,
 				8781869A26D35332006FC19F /* AspectVGrid.swift in Sources */,
 				87322D0426AA5B5F00A11D6E /* MemorizeApp.swift in Sources */,
 				8781869C26D55FBF006FC19F /* Pie.swift in Sources */,

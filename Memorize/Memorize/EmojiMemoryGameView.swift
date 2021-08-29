@@ -49,9 +49,9 @@ struct EmojiMemoryGameView: View {
                             }
                     }
                 }
-            
-                .padding(.horizontal)
                 .foregroundColor(game.getPrimaryColor())
+                .padding(.horizontal)
+                
     
            
             
@@ -101,43 +101,38 @@ struct CardView: View {
     
     var body: some View {
         // GeometryReader is going to use ALL its space that is offered to it
-        GeometryReader(content: { geometry in
+        GeometryReader { geometry in
             ZStack {
-                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                if card.isFaceUp {
-                    shape.fill().foregroundColor(.white)
-                    shape.stroke(lineWidth: DrawingConstants.lineWidth)
-                    
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                        .padding(DrawingConstants.piePadding)
-                        .opacity(DrawingConstants.pieOpacity)
-                        .scaleEffect(x: 0.5, y: 0.5)
-                        
-                    
-                    Text(card.content).font(font(in: geometry.size))
-                } else if card.isMatched {
-                    shape.opacity(0)
-                } else {
-                    shape.fill(gradient)
-                }
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                    .padding(DrawingConstants.piePadding)
+                    .opacity(DrawingConstants.pieOpacity)
+                    .scaleEffect(0.6)
+                
+                Text(card.content)
+                    // The card comes on screen with a rotation of 360, such that it is already rotated
+                    // This problem can be fixed via 
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360: 0))
+                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                    // Font is a viewModifier that is NOT Animatable
+                    .font(Font.system(size: DrawingConstants.fontSize))
+                    // the scaleEffect() does animate
+                    .scaleEffect(scale(thatFits: geometry.size))
             }
-            
-        })
+            .cardify(isFaceUp: card.isFaceUp, gradient: gradient)
+        }
     }
     
-    private func font(in size: CGSize) -> Font {
-        Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
     }
-    
     
     
     // Constants
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
         static let piePadding: CGFloat = 5
         static let pieOpacity: Double = 0.5
+        static let fontSize: CGFloat = 32
         
     }
 }
@@ -151,6 +146,10 @@ extension View {
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing))
             .mask(self)
+    }
+    
+    func cardify(isFaceUp: Bool, gradient: LinearGradient) -> some View {
+        self.modifier(Cardify(isFaceUp: isFaceUp, gradient: gradient))
     }
 }
 

@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Basics.md",
+            "file": "Properties.md",
             "mode": "source"
           }
         }
@@ -52,7 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 100
+    "width": 212
   },
   "right": {
     "id": "c3b84cb079de4b08",
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Basics.md",
+                "file": "Properties.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,15 +88,15 @@
   },
   "active": "012c42391c41f7be",
   "lastOpenFiles": [
+    "Properties.md",
+    "Closures.md",
+    "Strings and Characters.md",
+    "Structures and Classes.md",
+    "Untitled.md",
     "Basics.md",
     "Assignment2_Instructions.md",
     "Assignment1_Instructions.md",
     "Access Control.md",
-    "Untitled.md",
-    "Screen Shot 2021-08-16 at 10.37.32 AM.png",
-    "Nested Types.md",
-    "est.md",
-    "Neated.md",
-    "Untitled 1.md"
+    "Screen Shot 2021-08-16 at 10.37.32 AM.png"
   ]
 }

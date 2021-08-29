@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Protocols Shapes.md",
+            "file": "Animation Demo.md",
             "mode": "source"
           }
         }
@@ -52,8 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 243,
-    "collapsed": true
+    "width": 243
   },
   "right": {
     "id": "12934c3150a8a923",
@@ -69,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Protocols Shapes.md",
+                "file": "Animation Demo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,15 +88,15 @@
   },
   "active": "c91bb85158f06081",
   "lastOpenFiles": [
+    "Animation Demo.md",
+    "Untitled 5.md",
+    "ViewModifier Animation.md",
     "Protocols Shapes.md",
     "Properties Layout @ViewBuilder.md",
     "More MVVM enum, Optionals.md",
     "MVVM and the Swift Type System.md",
     "Screen Shot 2021-08-06 at 9.41.09 AM.png",
     "Screen Shot 2021-08-06 at 9.48.58 AM.png",
-    "MVVM.md",
-    "Animation Demo.md",
-    "Untitled 5.md",
-    "Persistence Error Handling.md"
+    "MVVM.md"
   ]
 }
