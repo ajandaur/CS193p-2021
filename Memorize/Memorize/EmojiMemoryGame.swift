@@ -85,7 +85,7 @@ class EmojiMemoryGame: ObservableObject {
         Theme<String>(setOfContent: ["📱","📀","📷","💾","🖲","🕹","🖨","🖥","💻","⌨️","📲","🖱"],
                       primaryThemeColor: "purple",
                       secondaryThemeColor: "blue",
-                      themeName: "Tech")
+                      themeName: "Technology")
     
     ]
     
@@ -136,9 +136,22 @@ class EmojiMemoryGame: ObservableObject {
          model.score
     }
     
+    // create a radial gradient with the accent color
+    var themeGradient: LinearGradient {
+        return LinearGradient(gradient:
+                                Gradient(colors: [getPrimaryColor(),
+                                                  getSecondaryColor()]),
+                              startPoint: .topLeading,
+                              endPoint: .bottomTrailing)
+    }
+    
     // MARK: - Intent(s)
     func choose(_ card: Card) {
         model.choose(card)
+    }
+    
+    func shuffle() {
+        model.shuffle()
     }
     
 }
