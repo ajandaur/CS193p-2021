@@ -13,11 +13,11 @@ I am also planning to add examples and notes from the assigned readings but only
 ## Progress
 Type                                | Quantity  | Completion
 :---                                |  :---:  |   :---:
-Lectures                            | 6 / 14 |   42%
-**Assignments**                     |  2 / 6  | **33%**
+Lectures                            | 8 / 14 |  **57%**
+Assignments                         |  2 / 6  | **33%**
 Extra credits                       |  2 / 5  | **40%**
 
-## Screenshots (COMING SOON!)
+## Demos (COMING SOON!)
 
 ### Memorize
 
