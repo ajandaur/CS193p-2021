@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Properties.md",
+            "file": "Human Interface Guidelines.md",
             "mode": "source"
           }
         }
@@ -52,7 +52,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 212
+    "width": 100,
+    "collapsed": true
   },
   "right": {
     "id": "c3b84cb079de4b08",
@@ -68,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Properties.md",
+                "file": "Human Interface Guidelines.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,6 +89,7 @@
   },
   "active": "012c42391c41f7be",
   "lastOpenFiles": [
+    "Human Interface Guidelines.md",
     "Properties.md",
     "Closures.md",
     "Strings and Characters.md",
@@ -96,7 +98,6 @@
     "Basics.md",
     "Assignment2_Instructions.md",
     "Assignment1_Instructions.md",
-    "Access Control.md",
-    "Screen Shot 2021-08-16 at 10.37.32 AM.png"
+    "Access Control.md"
   ]
 }
