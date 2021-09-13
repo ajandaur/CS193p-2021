@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Human Interface Guidelines.md",
+            "file": "Assignment3_Instructions.md",
             "mode": "source"
           }
         }
@@ -52,8 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 100,
-    "collapsed": true
+    "width": 217
   },
   "right": {
     "id": "c3b84cb079de4b08",
@@ -69,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Human Interface Guidelines.md",
+                "file": "Assignment3_Instructions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,15 +88,15 @@
   },
   "active": "012c42391c41f7be",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Assignment1_Instructions.md",
+    "Assignment2_Instructions.md",
     "Human Interface Guidelines.md",
     "Properties.md",
     "Closures.md",
     "Strings and Characters.md",
     "Structures and Classes.md",
-    "Untitled.md",
     "Basics.md",
-    "Assignment2_Instructions.md",
-    "Assignment1_Instructions.md",
     "Access Control.md"
   ]
 }

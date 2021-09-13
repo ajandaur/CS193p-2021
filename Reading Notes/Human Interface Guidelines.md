@@ -44,3 +44,10 @@
 - Design a system where it makes it fast and easy to get content 
 - Use touch gestures to make it easy to move through the interfact without friction! -> let people swipe from side of the screen to return to the previous screen
 # Accessing User Data 
+- Privacy is very important when accessing User Data
+## Requesting Access Permission
+- You must ask for permission before using user data or protected resources 
+- Only request permission when your app needs access to the data or resource
+- Request permission at launch only when teh data or resource is necessary for your app to function
+- **Never precede the system-provided alert with custom messaging that could confuse or mislead people.** People sometimes tap quickly to dismiss alerts without reading them. A custom messaging screen that takes advantage of such behaviors to influence choices will lead to rejection by App Store Review.
+# Settings

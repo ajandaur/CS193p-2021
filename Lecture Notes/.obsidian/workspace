@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Animation Demo.md",
+            "file": "EmojiArt Drag+Drop.md",
             "mode": "source"
           }
         }
@@ -52,7 +52,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 243
+    "width": 243,
+    "collapsed": true
   },
   "right": {
     "id": "12934c3150a8a923",
@@ -68,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Animation Demo.md",
+                "file": "EmojiArt Drag+Drop.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,6 +89,7 @@
   },
   "active": "c91bb85158f06081",
   "lastOpenFiles": [
+    "EmojiArt Drag+Drop.md",
     "Animation Demo.md",
     "Untitled 5.md",
     "ViewModifier Animation.md",
@@ -96,7 +98,6 @@
     "More MVVM enum, Optionals.md",
     "MVVM and the Swift Type System.md",
     "Screen Shot 2021-08-06 at 9.41.09 AM.png",
-    "Screen Shot 2021-08-06 at 9.48.58 AM.png",
-    "MVVM.md"
+    "Screen Shot 2021-08-06 at 9.48.58 AM.png"
   ]
 }
