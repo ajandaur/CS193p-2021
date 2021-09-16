@@ -10,6 +10,8 @@
 		8756DB1F26E1ACAC001A2DD1 /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756DB1E26E1ACAC001A2DD1 /* Diamond.swift */; };
 		8756DB2126E1ACF4001A2DD1 /* Squiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756DB2026E1ACF4001A2DD1 /* Squiggle.swift */; };
 		8776B67326EAEA1A000653AB /* oneAndOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8776B67226EAEA1A000653AB /* oneAndOnly.swift */; };
+		8776B69A26F11CDA000653AB /* StripedShadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8776B69926F11CDA000653AB /* StripedShadingView.swift */; };
+		8776B69C26F12043000653AB /* CardSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8776B69B26F12043000653AB /* CardSymbolView.swift */; };
 		87DCE43226E01E1F00543F85 /* SetGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DCE43126E01E1F00543F85 /* SetGameApp.swift */; };
 		87DCE43426E01E1F00543F85 /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DCE43326E01E1F00543F85 /* SetGameView.swift */; };
 		87DCE43626E01E2300543F85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87DCE43526E01E2300543F85 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		8756DB1E26E1ACAC001A2DD1 /* Diamond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
 		8756DB2026E1ACF4001A2DD1 /* Squiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squiggle.swift; sourceTree = "<group>"; };
 		8776B67226EAEA1A000653AB /* oneAndOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oneAndOnly.swift; sourceTree = SOURCE_ROOT; };
+		8776B69926F11CDA000653AB /* StripedShadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripedShadingView.swift; sourceTree = SOURCE_ROOT; };
+		8776B69B26F12043000653AB /* CardSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSymbolView.swift; sourceTree = "<group>"; };
 		87DCE42E26E01E1F00543F85 /* SetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87DCE43126E01E1F00543F85 /* SetGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameApp.swift; sourceTree = "<group>"; };
 		87DCE43326E01E1F00543F85 /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
@@ -66,10 +70,6 @@
 			children = (
 				8776B67226EAEA1A000653AB /* oneAndOnly.swift */,
 				87DCE43126E01E1F00543F85 /* SetGameApp.swift */,
-				87DCE43326E01E1F00543F85 /* SetGameView.swift */,
-				87DCE44226E01F4200543F85 /* SetGameVM.swift */,
-				87DCE44426E01F5000543F85 /* SetGame.swift */,
-				87DCE44026E01E7900543F85 /* AspectVGrid.swift */,
 				87DCE44926E0402C00543F85 /* Shapes */,
 				87DCE44826E0402500543F85 /* Views */,
 				87DCE44726E0401E00543F85 /* ViewModel */,
@@ -92,6 +92,7 @@
 		87DCE44626E0401100543F85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				87DCE44426E01F5000543F85 /* SetGame.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -99,6 +100,7 @@
 		87DCE44726E0401E00543F85 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				87DCE44226E01F4200543F85 /* SetGameVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -106,6 +108,10 @@
 		87DCE44826E0402500543F85 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8776B69926F11CDA000653AB /* StripedShadingView.swift */,
+				8776B69B26F12043000653AB /* CardSymbolView.swift */,
+				87DCE44026E01E7900543F85 /* AspectVGrid.swift */,
+				87DCE43326E01E1F00543F85 /* SetGameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,9 +194,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8776B69A26F11CDA000653AB /* StripedShadingView.swift in Sources */,
 				8756DB1F26E1ACAC001A2DD1 /* Diamond.swift in Sources */,
 				8756DB2126E1ACF4001A2DD1 /* Squiggle.swift in Sources */,
 				8776B67326EAEA1A000653AB /* oneAndOnly.swift in Sources */,
+				8776B69C26F12043000653AB /* CardSymbolView.swift in Sources */,
 				87DCE43426E01E1F00543F85 /* SetGameView.swift in Sources */,
 				87DCE44526E01F5000543F85 /* SetGame.swift in Sources */,
 				87DCE43226E01E1F00543F85 /* SetGameApp.swift in Sources */,

@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct EmojiArtDocumentView: View {
-    // view model
-    // You really don't want to use equals since to initialize..
-    //
     @ObservedObject var document: EmojiArtDocument
     
     let defaultEmojiFontSize: CGFloat = 40
+    
     var body: some View {
         VStack(spacing: 0) {
             documentBody
@@ -24,85 +22,157 @@ struct EmojiArtDocumentView: View {
     var documentBody: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.yellow
-                ForEach(document.emojis)  { emoji in
-                    Text(emoji.text)
-                        // where do these emojis go and what size??
-                        .font(.system(size: fontSize(for: emoji)))
-                        .position(position(for: emoji, in: geometry))
+                Color.white.overlay(
+                    OptionalImage(uiImage: document.backgroundImage)
+                        .scaleEffect(zoomScale)
+                        .position(convertFromEmojiCoordinates((0,0), in: geometry))
+                )
+                .gesture(doubleTapToZoom(in: geometry.size))
+                if document.backgroundImageFetchStatus == .fetching {
+                    ProgressView().scaleEffect(2)
+                } else {
+                    ForEach(document.emojis) { emoji in
+                        Text(emoji.text)
+                            .font(.system(size: fontSize(for: emoji)))
+                            .scaleEffect(zoomScale)
+                            .position(position(for: emoji, in: geometry))
+                    }
                 }
             }
-            // What kinds of things do you want dropped on you??
-            .onDrop(of: [.plainText], isTargeted: nil) { providers, location in
-                // return whether the drop was successful
-                return drop(providers: providers, at: location, in: geometry)
+            .clipped()
+            .onDrop(of: [.plainText,.url,.image], isTargeted: nil) { providers, location in
+                drop(providers: providers, at: location, in: geometry)
             }
-        }
-        
-    }
-    
-    private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool
-    {
-        // see if these providers have a string and if they do have a string -> call the closure with the string bound in there (asynchronously)
-        return providers.loadObjects(ofType: String.self) { string in
-            // make sure you are only passing in emojis
-            if let emoji = string.first, emoji.isEmoji {
-                document.addEmoji(
-                    String(emoji),
-                    at: convertToEmojiCoordinates(location, in: geometry),
-                    size: defaultEmojiFontSize)
-            }
+            .gesture(panGesture().simultaneously(with: zoomGesture()))
         }
     }
     
-    private func fontSize(for emoji: EmojiArtModel.Emoji) -> CGFloat {
-        CGFloat(emoji.size)
-        
-        // TODO: -  need to modify size via pinch gesture..
+    // MARK: - Drag and Drop
+    
+    private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
+        var found = providers.loadObjects(ofType: URL.self) { url in
+            document.setBackground(.url(url.imageURL))
+        }
+        if !found {
+            found = providers.loadObjects(ofType: UIImage.self) { image in
+                if let data = image.jpegData(compressionQuality: 1.0) {
+                    document.setBackground(.imageData(data))
+                }
+            }
+        }
+        if !found {
+            found = providers.loadObjects(ofType: String.self) { string in
+                if let emoji = string.first, emoji.isEmoji {
+                    document.addEmoji(
+                        String(emoji),
+                        at: convertToEmojiCoordinates(location, in: geometry),
+                        size: defaultEmojiFontSize / zoomScale
+                    )
+                }
+            }
+        }
+        return found
     }
+    
+    // MARK: - Positioning/Sizing Emoji
     
     private func position(for emoji: EmojiArtModel.Emoji, in geometry: GeometryProxy) -> CGPoint {
         convertFromEmojiCoordinates((emoji.x, emoji.y), in: geometry)
     }
     
+    private func fontSize(for emoji: EmojiArtModel.Emoji) -> CGFloat {
+        CGFloat(emoji.size)
+    }
+    
     private func convertToEmojiCoordinates(_ location: CGPoint, in geometry: GeometryProxy) -> (x: Int, y: Int) {
         let center = geometry.frame(in: .local).center
-        // everythign in the "Emoji-world" is off center
         let location = CGPoint(
-            x: location.x - center.x,
-            y: location.y - center.y
+            x: (location.x - panOffset.width - center.x) / zoomScale,
+            y: (location.y - panOffset.height - center.y) / zoomScale
         )
-        // return tuple
         return (Int(location.x), Int(location.y))
     }
     
     private func convertFromEmojiCoordinates(_ location: (x: Int, y: Int), in geometry: GeometryProxy) -> CGPoint {
-        // frame returns a CGRect
         let center = geometry.frame(in: .local).center
         return CGPoint(
-            x: center.x + CGFloat(location.x),
-            y: center.y + CGFloat(location.y)
+            x: center.x + CGFloat(location.x) * zoomScale + panOffset.width,
+            y: center.y + CGFloat(location.y) * zoomScale + panOffset.height
         )
     }
     
+    // MARK: - Zooming
+    
+    @State private var steadyStateZoomScale: CGFloat = 1
+    @GestureState private var gestureZoomScale: CGFloat = 1
+    
+    private var zoomScale: CGFloat {
+        steadyStateZoomScale * gestureZoomScale
+    }
+    
+    private func zoomGesture() -> some Gesture {
+        MagnificationGesture()
+            .updating($gestureZoomScale) { latestGestureScale, gestureZoomScale, _ in
+                gestureZoomScale = latestGestureScale
+            }
+            .onEnded { gestureScaleAtEnd in
+                steadyStateZoomScale *= gestureScaleAtEnd
+            }
+    }
+    
+    private func doubleTapToZoom(in size: CGSize) -> some Gesture {
+        TapGesture(count: 2)
+            .onEnded {
+                withAnimation {
+                    zoomToFit(document.backgroundImage, in: size)
+                }
+            }
+    }
+    
+    private func zoomToFit(_ image: UIImage?, in size: CGSize) {
+        if let image = image, image.size.width > 0, image.size.height > 0, size.width > 0, size.height > 0  {
+            let hZoom = size.width / image.size.width
+            let vZoom = size.height / image.size.height
+            steadyStatePanOffset = .zero
+            steadyStateZoomScale = min(hZoom, vZoom)
+        }
+    }
+    
+    // MARK: - Panning
+    
+    @State private var steadyStatePanOffset: CGSize = CGSize.zero
+    @GestureState private var gesturePanOffset: CGSize = CGSize.zero
+    
+    private var panOffset: CGSize {
+        (steadyStatePanOffset + gesturePanOffset) * zoomScale
+    }
+    
+    private func panGesture() -> some Gesture {
+        DragGesture()
+            .updating($gesturePanOffset) { latestDragGestureValue, gesturePanOffset, _ in
+                gesturePanOffset = latestDragGestureValue.translation / zoomScale
+            }
+            .onEnded { finalDragGestureValue in
+                steadyStatePanOffset = steadyStatePanOffset + (finalDragGestureValue.translation / zoomScale)
+            }
+    }
+
+    // MARK: - Palette
+    
     var palette: some View {
-        ScrollingEmojiView(emojis: testEmojis)
-            // this font will propagate up through the ScrollingEmojiView to affect the size
+        ScrollingEmojisView(emojis: testEmojis)
             .font(.system(size: defaultEmojiFontSize))
     }
     
-    let testEmojis = "😆😅😔😣😳🥱💀😽😸🦿👤👱🏻👨🏼‍🌾🧑🏻‍🍳👩🏽‍💼👰🏻🧙🏻‍♂️🧚🏽"
+    let testEmojis = "😀😷🦠💉👻👀🐶🌲🌎🌞🔥🍎⚽️🚗🚓🚲🛩🚁🚀🛸🏠⌚️🎁🗝🔐❤️⛔️❌❓✅⚠️🎶➕➖🏳️"
 }
 
-struct ScrollingEmojiView: View {
-    
+struct ScrollingEmojisView: View {
     let emojis: String
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                // using map here for the first time !
-                // Take anything we an sequence through and it maps it to an array and does the following expression to them
                 ForEach(emojis.map { String($0) }, id: \.self) { emoji in
                     Text(emoji)
                         .onDrag { NSItemProvider(object: emoji as NSString) }
@@ -110,17 +180,7 @@ struct ScrollingEmojiView: View {
             }
         }
     }
-    
 }
-
-
-
-
-
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

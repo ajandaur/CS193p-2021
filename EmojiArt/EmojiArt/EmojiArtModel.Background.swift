@@ -10,7 +10,8 @@ import Foundation
 extension EmojiArtModel {
     
     // background can only be three different things.. Enum !
-    enum Background {
+    // Swift knows how to equate enums, url, and data
+    enum Background: Equatable {
         case blank
         case url(URL)
         case imageData(Data)

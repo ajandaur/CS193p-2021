@@ -7,9 +7,19 @@
 
 import SwiftUI
 
-struct Squiggle: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct Squiggle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        
+        p.move(to: CGPoint(x: rect.minX, y: rect.midY/2))
+        
+        p.addLine(to: CGPoint(x: rect.minX, y: rect.maxY-rect.midY*(3/4)))
+        p.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.maxY-rect.midY/2), control: CGPoint(x: rect.maxX-rect.midX/2, y: rect.maxY))
+        
+        p.addLine(to: CGPoint(x: rect.maxX, y: rect.midY*(3/4)))
+        p.addQuadCurve(to: CGPoint(x: rect.minX , y: rect.midY/2), control: CGPoint(x: rect.midX/2 , y: rect.minY))
+        
+        return p
     }
 }
 

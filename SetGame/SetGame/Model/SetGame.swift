@@ -97,10 +97,107 @@ struct SetGame {
                 // if another card is selected after 3 cards are already selected
                 if !(selectedCards.count == 3 ) && !setFound {
                     selectedCards.removeAll(where: { $0.id == cards[chosenIndex].id })
+                    cards[chosenIndex].isSelected = false
                 }
             }
         }
+    }
+    
+    mutating func drawCards() {
+        if threeCardsChosen && setFound {
+            if !deck.isEmpty {
+                for index in 0..<3 {
+                    if let chosenIndex = cards.firstIndex(where: { $0.id == selectedCards[index].id }) {
+                        cards[chosenIndex] = deck[index]
+                    }
+                }
+                
+                deck.removeSubrange(0..<3)
+            } else {
+                for index in 0..<3 {
+                    cards.removeAll(where: { $0.id == selectedCards[index].id })
+                }
+            }
+            
+            for selectCard in selectedCards {
+                discardPile.append(selectCard)
+            }
+            
+            selectedCards.removeAll()
+            
+            // if cards were a set, increment score
+            score += 3
+            
+            // reset
+            setFound = false
+            threeCardsChosen = false
+            
+        } else {
+            if !deck.isEmpty {
+                for i in 0..<3 {
+                    cards.append(deck[i])
+                }
+                deck.removeSubrange(0..<3)
+            }
+        }
+    }
+    
+    init() {
+        deck = []
+        cards = []
+        discardPile = []
+        selectedCards = []
+        score = 0
         
+        deck.removeAll()
+        cards.removeAll()
+        selectedCards.removeAll()
+        
+        threeCardsChosen = false
+        setFound = false
+        
+        createNewDeck()
+        deck.shuffle()
+        
+        for i in 0..<12 {
+            cards.append(deck[i])
+        }
+        deck.removeSubrange(0..<12)
+    }
+    
+    // create a new deck
+    mutating func createNewDeck() {
+        deck.removeAll()
+        var id = 0
+        for color in Card.CardColor.allCases {
+            for shading in Card.CardShading.allCases {
+                for shape in Card.CardShape.allCases {
+                    for number in Card.CardNumber.allCases {
+                        deck.append(Card(color: color, shading: shading, shapeNumber: number, shapeType: shape, id: id))
+                        id += 1
+                    }
+                }
+            }
+        }
+    }
+    
+    // checking if cards selected are a set
+    private func isSet(cards: [Card]) -> Bool {
+        let firstCard = cards[0]
+        let secondCard = cards[1]
+        let thirdCard = cards[2]
+        
+        return noTwoOf(firstCard.shading, secondCard.shading, thirdCard.shading) &&
+            noTwoOf(firstCard.color, secondCard.color, thirdCard.color) &&
+            noTwoOf(firstCard.shapeType, secondCard.shapeType, thirdCard.shapeType) &&
+        noTwoOf(firstCard.shapeNumber, secondCard.shapeNumber, thirdCard.shapeNumber)
+    }
+    
+    // check whether there are two of anything only
+    private func noTwoOf<T: Comparable>(_ first: T, _ second: T, _ third: T) -> Bool {
+        return !((first == second && first != third) ||
+                (first == third && first != second) ||
+                (second == third && first != second))
     }
     
     
