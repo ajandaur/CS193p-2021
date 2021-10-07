@@ -8,18 +8,30 @@
 import SwiftUI
 
 struct SetGameView: View {
-    
     @ObservedObject var game: SetGameVM
     
+    @Namespace private var dealingNameSpace
     
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Text("Hello")
     }
+}
+
+
+struct CardView: View {
+
+    
+    var body: some View
+    {
+        Text("")
+    }
+    
+
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SetGameView()
+        let game = SetGameVM()
+        SetGameView(game: game)
     }
 }

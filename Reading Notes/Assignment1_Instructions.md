@@ -2,38 +2,38 @@
 
 # Required Tasks
 
-- [ X] Get the Memorize game working as demonstrated in lectures 1 and 2. Type in all the code. Do not copy/paste from anywhere.
+- [X] Get the Memorize game working as demonstrated in lectures 1 and 2. Type in all the code. Do not copy/paste from anywhere.
     
-- [ X] You can remove the ⊖ and ⊕ buttons at the bottom of the screen.
+- [X] You can remove the ⊖ and ⊕ buttons at the bottom of the screen.
 	
-- [X ] Add a title “Memorize!” to the top of the screen.
+- [X] Add a title “Memorize!” to the top of the screen.
 
-- [ X] Add at least 3 “theme choosing” buttons to your UI, each of which causes all of the cards to be replaced with new cards that contain emoji that match the chosen theme. You can use Vehicles from lecture as one of the 3 themes if you want to, but you are welcome to create 3 (or more) completely new themes.
+- [X] Add at least 3 “theme choosing” buttons to your UI, each of which causes all of the cards to be replaced with new cards that contain emoji that match the chosen theme. You can use Vehicles from lecture as one of the 3 themes if you want to, but you are welcome to create 3 (or more) completely new themes.
 	
-- [X ] The number of cards in each of your 3 themes should be different, but in no case fewer than 8.
+- [X] The number of cards in each of your 3 themes should be different, but in no case fewer than 8.
     
 	
-- [X ] The cards that appear when a theme button is touched should be in an unpredictable (i.e. random) order. In other words, the cards should be shuffled each time a theme button is chosen.
+- [X] The cards that appear when a theme button is touched should be in an unpredictable (i.e. random) order. In other words, the cards should be shuffled each time a theme button is chosen.
     
 	
-- [X ] The theme-choosing buttons must include an image representing the theme and text describing the theme stacked on top of each other vertically.
+- [X] The theme-choosing buttons must include an image representing the theme and text describing the theme stacked on top of each other vertically.
     
 	
-- [ X] The image portion of each of the theme-choosing buttons must be created using an SF Symbol which evokes the idea of the theme it chooses (like the car symbol and the Vehicles theme shown in the Screenshot section below).
+- [X] The image portion of each of the theme-choosing buttons must be created using an SF Symbol which evokes the idea of the theme it chooses (like the car symbol and the Vehicles theme shown in the Screenshot section below).
     
 	
-- [ X] The text description of the theme-choosing buttons must use anoticeably smaller font than the font we chose for the emoji on the cards.
+- [X] The text description of the theme-choosing buttons must use anoticeably smaller font than the font we chose for the emoji on the cards.
     
 	
-- [X ] Your UI should work in portrait or landscape on any iPhone. This probably will not require any work on your part (that’s part of the power of SwiftUI), but be sure to experiment with running on different simulators in Xcode to be sure.
+- [X] Your UI should work in portrait or landscape on any iPhone. This probably will not require any work on your part (that’s part of the power of SwiftUI), but be sure to experiment with running on different simulators in Xcode to be sure.
 
 Extra Credit
 
 Here are some additional ways to challenge yourself ...
 
-1.  Make a random number of cards appear each time a theme button is chosen.The function Int.random(in: Range<Int>) can generate a random integer in any range, for example, let random = Int.random(in: 15...75) would generate a random integer between 15 and 75 (inclusive). Always show at least 4 cards though.
+1. [X] Make a random number of cards appear each time a theme button is chosen.The function Int.random(in: Range<Int>) can generate a random integer in any range, for example, let random = Int.random(in: 15...75) would generate a random integer between 15 and 75 (inclusive). Always show at least 4 cards though.
 
-2. Try to come up with some sort of equation that relates the number of cards in the game to the width you pass when you create your LazyVGrid’s GridItem(.adaptive(minimum:maximum:)) such that each time a theme button is chosen, the LazyVGrid makes the cards as big as possible without having to scroll.
+2. [X] Try to come up with some sort of equation that relates the number of cards in the game to the width you pass when you create your LazyVGrid’s GridItem(.adaptive(minimum:maximum:)) such that each time a theme button is chosen, the LazyVGrid makes the cards as big as possible without having to scroll.
     
     For example, if 8 cards are shown, the cards should be pretty big, but if 24 cards are shown, they should be smaller. The cards should still have our 2/3 aspect ratio.
     
