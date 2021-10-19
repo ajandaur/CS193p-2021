@@ -13,7 +13,7 @@ I am also planning to add examples and notes from the assigned readings but only
 ## Progress
 Type                                | Quantity  | Completion
 :---                                |  :---:  |   :---:
-Lectures                            | 8 / 14 |  **57%**
+Lectures                            | 10 / 14 |  **71%**
 Assignments                         |  2 / 6  | **33%**
 Extra credits                       |  2 / 5  | **40%**
 
@@ -21,9 +21,9 @@ Extra credits                       |  2 / 5  | **40%**
 
 ### Memorize
 
+### SetGame
+
 ### EmojiArt
 
 ### Enroute
-
-### SetGame
 
