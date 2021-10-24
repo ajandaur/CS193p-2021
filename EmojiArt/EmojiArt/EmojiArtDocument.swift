@@ -10,18 +10,67 @@ import SwiftUI
 class EmojiArtDocument: ObservableObject
 {
     @Published private(set) var emojiArt: EmojiArtModel {
+        
         didSet {
+            autosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary()
             }
         }
     }
+    private struct Autosave {
+        static let filename = "Autosaved.emojiart"
+        static var url: URL? {
+            // for iOS we always use .userDomainMask
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            return documentDirectory?.appendingPathComponent(filename)
+        }
+        static let coalescingInterval = 5.0
+    }
+    
+    private var autosaveTimer: Timer?
+    
+    private func scheduleAutosave() {
+        // cancel the previous timer
+        autosaveTimer?.invalidate()
+        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval , repeats: false) { _ in
+            self.autosave()
+        }
+    }
+    
+    private func autosave() {
+        if let url = Autosave.url {
+            save(to: url)
+        }
+    }
+    
+    // Save EmojiArtDocument in file system via URL
+    private func save(to url: URL) {
+        let thisfunction = "\(String(describing: self)).\(#function)"
+        do {
+            let data: Data = try emojiArt.json()
+            print("\(thisfunction) json = \(String(data: data, encoding: .utf8) ?? "nil")")
+            try data.write(to: url)
+            print("\(thisfunction) success!")
+        } catch let encodingError where encodingError is EncodingError {
+            print("\(thisfunction) couldn't encode EmojiArt as JSON because \(encodingError.localizedDescription)")
+        } catch {
+            print("\(thisfunction) error = \(error)")
+        }
+     
+    }
     
     init() {
-        emojiArt = EmojiArtModel()
-        emojiArt.addEmoji("🧚🏻‍♂️", at: (-200, -100), size: 80)
-        emojiArt.addEmoji("👨🏻‍🍼", at: (50, 100), size: 40)
-    }
+        if let url = Autosave.url, let autosavedEmojiArt = try? EmojiArtModel(url: url) {
+            emojiArt = autosavedEmojiArt
+            fetchBackgroundImageDataIfNecessary()
+        } else {
+            emojiArt = EmojiArtModel()
+            // emojiArt.addEmoji("🧚🏻‍♂️", at: (-200, -100), size: 80)
+            //  emojiArt.addEmoji("👨🏻‍🍼", at: (50, 100), size: 40)
+        }
+        }
+       
     
     // computed vars
     var emojis: [EmojiArtModel.Emoji] { emojiArt.emojis }
@@ -36,6 +85,7 @@ class EmojiArtDocument: ObservableObject
     }
     
     private func fetchBackgroundImageDataIfNecessary() {
+        // blank out the background iamge
         backgroundImage = nil
         switch emojiArt.background {
         case .url(let url):
@@ -47,6 +97,8 @@ class EmojiArtDocument: ObservableObject
                 // try getting the data of the url and if not possible, return nil
                 let imageData = try? Data(contentsOf: url)
                 // when imageData returns, do the rest on back on the main queue asynchronously
+                // you can redefine the variable as weak such that it doesn't force itself to
+                // keep that self in to heap by turning it into an optional 
                 DispatchQueue.main.async { [ weak self] in
                     if self?.emojiArt.background == EmojiArtModel.Background.url(url) {
                         self?.backgroundImageFetchStatus = .idle

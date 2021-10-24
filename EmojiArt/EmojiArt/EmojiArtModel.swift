@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiArtModel {
+struct EmojiArtModel: Codable {
     
     // the background
     var background = Background.blank
@@ -16,7 +16,7 @@ struct EmojiArtModel {
     var emojis = [Emoji]()
     
     // Making Emoji Hashable because we are going to be putting them into a Set when organizing..
-    struct Emoji: Identifiable, Hashable {
+    struct Emoji: Identifiable, Hashable, Codable {
         // use let so we can't change the emoji on the fly
         let text: String
         
@@ -36,6 +36,21 @@ struct EmojiArtModel {
             self.size = size
             self.id = id
         }
+    }
+    
+    // Have function rethrow if anything in JSONEncoder throws an error
+    func json() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
+    
+    init(json: Data) throws {
+        // looks and sees if it can use the decoding mechanism and throws if it fails
+        self = try JSONDecoder().decode(EmojiArtModel.self, from: json)
+    }
+    
+    init(url: URL) throws {
+        let data = try Data(contentsOf: url)
+        self = try EmojiArtModel(json: data)
     }
     
     // to prevent user from using free init from EmojiArtModel model

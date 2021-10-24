@@ -25,6 +25,7 @@ struct EmojiArtDocumentView: View {
                 Color.white.overlay(
                     OptionalImage(uiImage: document.backgroundImage)
                         .scaleEffect(zoomScale)
+                        // put image in the center
                         .position(convertFromEmojiCoordinates((0,0), in: geometry))
                 )
                 .gesture(doubleTapToZoom(in: geometry.size))

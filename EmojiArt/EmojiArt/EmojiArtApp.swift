@@ -9,8 +9,8 @@ import SwiftUI
 
 @main
 struct EmojiArtApp: App {
-    // doesn't quite want to be a let..
     let document = EmojiArtDocument()
+    let paletteStore = PaletteStore(name: "Default")
     
     var body: some Scene {
         WindowGroup {

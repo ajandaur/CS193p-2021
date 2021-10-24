@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "ViewModifier Animation.md",
+            "file": "Persistence Error Handling.md",
             "mode": "source"
           }
         }
@@ -52,7 +52,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 243
+    "width": 243,
+    "collapsed": true
   },
   "right": {
     "id": "12934c3150a8a923",
@@ -68,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ViewModifier Animation.md",
+                "file": "Persistence Error Handling.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,10 +89,10 @@
   },
   "active": "c91bb85158f06081",
   "lastOpenFiles": [
-    "ViewModifier Animation.md",
-    "Protocols Shapes.md",
-    "Properties Layout @ViewBuilder.md",
     "Persistence Error Handling.md",
+    "Properties Layout @ViewBuilder.md",
+    "Protocols Shapes.md",
+    "ViewModifier Animation.md",
     "More MVVM enum, Optionals.md",
     "MVVM and the Swift Type System.md",
     "Learning more about SwiftUI.md",
