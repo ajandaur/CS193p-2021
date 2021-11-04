@@ -9,12 +9,15 @@ import SwiftUI
 
 @main
 struct EmojiArtApp: App {
-    let document = EmojiArtDocument()
-    let paletteStore = PaletteStore(name: "Default")
+    // use @StateObject so that you can search it for the source of truth
+    @StateObject var document = EmojiArtDocument()
+    @StateObject var paletteStore = PaletteStore(name: "Default")
     
     var body: some Scene {
         WindowGroup {
             EmojiArtDocumentView(document: document)
+                // inject into EmojiArtDocumentView and all other views that pass it along
+                .environmentObject(paletteStore)
         }
     }
 }
