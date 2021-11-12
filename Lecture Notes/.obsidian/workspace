@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Binding Sheet Navigation EditMode.md",
+            "file": "Publisher More Persistence.md",
             "mode": "source"
           }
         }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Binding Sheet Navigation EditMode.md",
+                "file": "Publisher More Persistence.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,6 +89,8 @@
   },
   "active": "c91bb85158f06081",
   "lastOpenFiles": [
+    "Publisher More Persistence.md",
+    "Untitled.md",
     "Binding Sheet Navigation EditMode.md",
     "Properties Layout @ViewBuilder.md",
     "Protocols Shapes.md",
@@ -96,8 +98,6 @@
     "Persistence Error Handling.md",
     "More MVVM enum, Optionals.md",
     "MVVM and the Swift Type System.md",
-    "Learning more about SwiftUI.md",
-    "Gestures.md",
-    "EmojiArt Drag+Drop.md"
+    "Learning more about SwiftUI.md"
   ]
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class EmojiArtDocument: ObservableObject
 {
@@ -86,6 +87,9 @@ class EmojiArtDocument: ObservableObject
         case failed(URL)
     }
     
+    // need to import Combine to use AnyCancellable
+    private var backgroundImageFetchCancellable: AnyCancellable?
+    
     private func fetchBackgroundImageDataIfNecessary() {
         // blank out the background iamge
         backgroundImage = nil
@@ -93,28 +97,48 @@ class EmojiArtDocument: ObservableObject
         case .url(let url):
             // fetch the url
             backgroundImageFetchStatus = .fetching
-            
-            // put this queue on another thread that is not the main one
-            DispatchQueue.global(qos: .userInitiated).async {
-                // try getting the data of the url and if not possible, return nil
-                let imageData = try? Data(contentsOf: url)
-                // when imageData returns, do the rest on back on the main queue asynchronously
-                // you can redefine the variable as weak such that it doesn't force itself to
-                // keep that self in to heap by turning it into an optional 
-                DispatchQueue.main.async { [ weak self] in
-                    if self?.emojiArt.background == EmojiArtModel.Background.url(url) {
-                        self?.backgroundImageFetchStatus = .idle
-                        if imageData != nil {
-                            self?.backgroundImage = UIImage(data: imageData!)
-                        }
-                        if self?.backgroundImage == nil {
-                            self?.backgroundImageFetchStatus = .failed(url)
-                        }
-                    }
-                   
+            // cancel the last fetch and start a new one
+            backgroundImageFetchCancellable?.cancel()
+            let session = URLSession.shared
+            // get dataTaskPublisher for this URL
+            let publisher = session.dataTaskPublisher(for: url)
+            // map it as a UIImage
+                .map { (data, URLResponse) in UIImage(data: data) }
+            // replace an errors with an image of nil
+                .replaceError(with: nil)
+            // do this work on the main queue
+                .receive(on: DispatchQueue.main)
+            backgroundImageFetchCancellable = publisher
+                .sink{ [weak self] image in
+                    self?.backgroundImage = image
+                    self?.backgroundImageFetchStatus = (image != nil) ? .idle : .failed(url)
                 }
-               
-            }
+            
+            
+//                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
+           
+            
+//            // put this queue on another thread that is not the main one
+//            DispatchQueue.global(qos: .userInitiated).async {
+//                // try getting the data of the url and if not possible, return nil
+//                let imageData = try? Data(contentsOf: url)
+//                // when imageData returns, do the rest on back on the main queue asynchronously
+//                // you can redefine the variable as weak such that it doesn't force itself to
+//                // keep that self in to heap by turning it into an optional
+//                DispatchQueue.main.async { [ weak self] in
+//                    if self?.emojiArt.background == EmojiArtModel.Background.url(url) {
+//                        self?.backgroundImageFetchStatus = .idle
+//                        if imageData != nil {
+//                            self?.backgroundImage = UIImage(data: imageData!)
+//                        }
+//                        if self?.backgroundImage == nil {
+//                            self?.backgroundImageFetchStatus = .failed(url)
+//                        }
+//                    }
+//
+//                }
+//
+//            }
          
             
         case .imageData(let data):
