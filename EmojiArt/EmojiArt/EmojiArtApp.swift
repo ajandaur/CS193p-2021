@@ -10,12 +10,12 @@ import SwiftUI
 @main
 struct EmojiArtApp: App {
     // use @StateObject so that you can search it for the source of truth
-    @StateObject var document = EmojiArtDocument()
     @StateObject var paletteStore = PaletteStore(name: "Default")
     
+    // A scene is just a high level container that contains the app 
     var body: some Scene {
-        WindowGroup {
-            EmojiArtDocumentView(document: document)
+        DocumentGroup(newDocument: { EmojiArtDocument() }) { config in
+            EmojiArtDocumentView(document: config.document)
                 // inject into EmojiArtDocumentView and all other views that pass it along
                 .environmentObject(paletteStore)
         }
