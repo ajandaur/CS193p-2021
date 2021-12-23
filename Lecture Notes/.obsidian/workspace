@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Document Architecture.md",
+            "file": "UIKit Integration.md",
             "mode": "source"
           }
         }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Document Architecture.md",
+                "file": "UIKit Integration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,6 +89,7 @@
   },
   "active": "c91bb85158f06081",
   "lastOpenFiles": [
+    "UIKit Integration.md",
     "Document Architecture.md",
     "Untitled 1.md",
     "Publisher More Persistence.md",
@@ -97,7 +98,6 @@
     "Protocols Shapes.md",
     "ViewModifier Animation.md",
     "Persistence Error Handling.md",
-    "More MVVM enum, Optionals.md",
-    "MVVM and the Swift Type System.md"
+    "More MVVM enum, Optionals.md"
   ]
 }

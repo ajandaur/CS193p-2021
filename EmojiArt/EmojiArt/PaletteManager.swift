@@ -42,18 +42,10 @@ struct PaletteManager: View {
             }
             .navigationTitle("Manage Palettes")
             .navigationBarTitleDisplayMode(.inline)
+            .dismissable { presentationMode.wrappedValue.dismiss() }
             .toolbar {
                 ToolbarItem {  EditButton() }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    // reach into a binding to get the wrappedValue
-                    if presentationMode.wrappedValue.isPresented,
-                       UIDevice.current.userInterfaceIdiom != .pad {
-                        // if it has been presented
-                        Button("Close") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
+       
                
             }
             .environment(\.colorScheme, .dark)
