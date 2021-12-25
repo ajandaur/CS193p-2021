@@ -2,7 +2,7 @@
 //  PaletteChooser.swift
 //  EmojiArt
 //
-//  Created by Anmol  Jandaur on 10/30/21.
+//  Created by CS193p Instructor on 5/5/21.
 //
 
 import SwiftUI
@@ -11,7 +11,6 @@ struct PaletteChooser: View {
     var emojiFontSize: CGFloat = 40
     var emojiFont: Font { .system(size: emojiFontSize) }
     
-    // inject it in the view
     @EnvironmentObject var store: PaletteStore
     
     @SceneStorage("PaletteChooser.chosenPaletteIndex")
@@ -28,33 +27,34 @@ struct PaletteChooser: View {
     var paletteControlButton: some View {
         Button {
             withAnimation {
-                chosenPaletteIndex = chosenPaletteIndex + 1 % store.palettes.count
+                chosenPaletteIndex = (chosenPaletteIndex + 1) % store.palettes.count
             }
-            
         } label: {
             Image(systemName: "paintpalette")
         }
         .font(emojiFont)
+        .paletteControlButtonStyle() // L16 see macOS.swift
         .contextMenu { contextMenu }
     }
     
     @ViewBuilder
     var contextMenu: some View {
         AnimatedActionButton(title: "Edit", systemImage: "pencil") {
-//           editing = true
             paletteToEdit = store.palette(at: chosenPaletteIndex)
         }
         AnimatedActionButton(title: "New", systemImage: "plus") {
             store.insertPalette(named: "New", emojis: "", at: chosenPaletteIndex)
-//            editing = true
             paletteToEdit = store.palette(at: chosenPaletteIndex)
         }
         AnimatedActionButton(title: "Delete", systemImage: "minus.circle") {
             chosenPaletteIndex = store.removePalette(at: chosenPaletteIndex)
         }
+        // L16 no EditMode on macOS, so no PaletteManager
+        #if os(iOS)
         AnimatedActionButton(title: "Manager", systemImage: "slider.vertical.3") {
-            chosenPaletteIndex = store.removePalette(at: chosenPaletteIndex)
+            managing = true
         }
+        #endif
         gotoMenu
     }
     
@@ -78,45 +78,34 @@ struct PaletteChooser: View {
             ScrollingEmojisView(emojis: palette.emojis)
                 .font(emojiFont)
         }
-        // id the View so that when the identifiable changes, the HStack will be replaced with new View
         .id(palette.id)
         .transition(rollTransition)
-//        .popover(isPresented: $editing) {
-//            // everything
-//            PaletteEditor(palette: $store.palettes[chosenPaletteIndex])
-//        }
         .popover(item: $paletteToEdit) { palette in
-            // everything
             PaletteEditor(palette: $store.palettes[palette])
-                .wrappedInNavigationViewToMakeDismissable {
-                    // closure to tell it how to actually dismiss
-                    paletteToEdit = nil
-                }
+                // L16 see macOS.swift
+                .popoverPadding()
+                // L15 make this popover dismissable with a Close button on iPhone
+                .wrappedInNavigationViewToMakeDismissable { paletteToEdit = nil }
         }
         .sheet(isPresented: $managing) {
             PaletteManager()
         }
     }
-    
-//    @State private var editing = false
-    // Other way to bring up popups and sheets
-    
+        
     @State private var managing = false
     @State private var paletteToEdit: Palette?
     
     var rollTransition: AnyTransition {
         AnyTransition.asymmetric(
             insertion: .offset(x: 0, y: emojiFontSize),
-            removal: .offset(x: 0, y: -emojiFontSize))
+            removal: .offset(x: 0, y: -emojiFontSize)
+        )
     }
-    
-    
 }
-
 
 struct ScrollingEmojisView: View {
     let emojis: String
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             HStack {

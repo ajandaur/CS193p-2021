@@ -2,24 +2,21 @@
 //  PaletteManager.swift
 //  EmojiArt
 //
-//  Created by Anmol  Jandaur on 11/3/21.
+//  Created by CS193p Instructor on 5/5/21.
 //
 
 import SwiftUI
 
+// L16 Moved to iOS-only on multiplatform version
+
 struct PaletteManager: View {
-    // inject store into this view
     @EnvironmentObject var store: PaletteStore
     @Environment(\.presentationMode) var presentationMode
-    
-    @Environment(\.colorScheme) var colorScheme
     
     @State private var editMode: EditMode = .inactive
     
     var body: some View {
-        // ALL NavigationLinks must have an accompying NavigationView
         NavigationView {
-            // Sort of like a VStack.. List!
             List {
                 ForEach(store.palettes) { palette in
                     NavigationLink(destination: PaletteEditor(palette: $store.palettes[palette])) {
@@ -27,13 +24,10 @@ struct PaletteManager: View {
                             Text(palette.name)
                             Text(palette.emojis)
                         }
-                        // when gesture is nil, it will not interfere with NavigationLink
-                        // when in editMode, tap will occur to bring up UI
-                        .gesture(editMode == .active ? tap: nil)
+                        .gesture(editMode == .active ? tap : nil)
                     }
                 }
                 .onDelete { indexSet in
-                    
                     store.palettes.remove(atOffsets: indexSet)
                 }
                 .onMove { indexSet, newOffset in
@@ -44,17 +38,10 @@ struct PaletteManager: View {
             .navigationBarTitleDisplayMode(.inline)
             .dismissable { presentationMode.wrappedValue.dismiss() }
             .toolbar {
-                ToolbarItem {  EditButton() }
-       
-               
+                ToolbarItem { EditButton() }
             }
-            .environment(\.colorScheme, .dark)
-            
-            // bind the Edit Mode to a local variable in our view
             .environment(\.editMode, $editMode)
-            
         }
-        
     }
     
     var tap: some Gesture {
@@ -65,7 +52,8 @@ struct PaletteManager: View {
 struct PaletteManager_Previews: PreviewProvider {
     static var previews: some View {
         PaletteManager()
-            .environmentObject(PaletteStore(name: "Preview"))
-            .preferredColorScheme(.dark)
+            .previewDevice("iPhone 8")
+            .environmentObject(PaletteStore(named: "Preview"))
+            .preferredColorScheme(.light)
     }
 }

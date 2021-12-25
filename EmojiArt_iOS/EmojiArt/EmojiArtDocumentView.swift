@@ -105,7 +105,7 @@ struct EmojiArtDocumentView: View {
     
     private func handlePickedBackgroundImage(_ image: UIImage?) {
         autozoom = true
-        if let imageData = image?.jpegData(compressionQuality: 1.0) {
+        if let imageData = image?.imageData {
             document.setBackground(.imageData(imageData), undoManager: undoManager)
         }
         backgroundPicker = nil
@@ -120,9 +120,9 @@ struct EmojiArtDocumentView: View {
     }
     
     private func pasteBackground() {
-        if let imageData = UIPasteboard.general.image?.jpegData(compressionQuality: 1.0) {
+        if let imageData = Pasteboard.imageData {
             document.setBackground(.imageData(imageData), undoManager: undoManager)
-        } else if let url = UIPasteboard.general.url?.imageURL {
+        } else if let url = Pasteboard.imageURL {
             document.setBackground(.url(url), undoManager: undoManager)
         } else {
             alertToShow = IdentifiableAlert(
@@ -153,6 +153,7 @@ struct EmojiArtDocumentView: View {
             document.setBackground(.url(url.imageURL), undoManager: undoManager)
         }
         if !found {
+            #if os(iOS)
             found = providers.loadObjects(ofType: UIImage.self) { image in
                 if let data = image.jpegData(compressionQuality: 1.0) {
                     autozoom = true
@@ -160,6 +161,7 @@ struct EmojiArtDocumentView: View {
                 }
             }
         }
+        #endif
         if !found {
             found = providers.loadObjects(ofType: String.self) { string in
                 if let emoji = string.first, emoji.isEmoji {
